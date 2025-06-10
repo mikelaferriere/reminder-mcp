@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.send('Reminder MCP Server is running');
 });
-
+ 
 // MCP Endpoints
 
 /**
