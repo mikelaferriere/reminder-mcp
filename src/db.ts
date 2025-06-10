@@ -1,8 +1,8 @@
 
 
-const { Pool } = require('pg');
+import { Pool } from 'pg';
 
-let db;
+let db: Pool;
 
 if (process.env.DATABASE_URL) {
   // Use a connection string for Heroku or other cloud providers
@@ -19,9 +19,9 @@ if (process.env.DATABASE_URL) {
     host: process.env.DB_HOST || 'localhost',
     database: process.env.DB_NAME || 'reminder_mcp',
     password: process.env.DB_PASSWORD || 'password',
-    port: process.env.DB_PORT || 5432,
+    port: parseInt(process.env.DB_PORT || '5432', 10),
   });
 }
 
-module.exports = db;
+export default db;
 

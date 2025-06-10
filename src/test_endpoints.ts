@@ -1,6 +1,7 @@
 
 
-const axios = require('axios');
+
+import axios from 'axios';
 
 async function testEndpoints() {
   const baseURL = 'http://localhost:58968';
@@ -41,4 +42,5 @@ async function testEndpoints() {
 }
 
 testEndpoints().catch(console.error);
+
 
