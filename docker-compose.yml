@@ -10,7 +10,27 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=reminder_mcp
+      - DB_HOST=db
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: reminder_mcp
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
 
