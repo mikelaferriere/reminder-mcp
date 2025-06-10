@@ -1,4 +1,6 @@
 
+
+
 # Use an official Node.js runtime as a parent image
 FROM node:14
 
@@ -14,8 +16,13 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
+# Build TypeScript files
+RUN npm run build
+
 # Expose the port that the app runs on
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "server.js"]
+CMD ["node", "dist/server.js"]
+
+

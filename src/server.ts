@@ -1,26 +1,28 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const db = require('./db');
+
+
+import express, { Request, Response } from 'express';
+import bodyParser from 'body-parser';
+import db from './db';
 
 const app = express();
 
 // Use environment variable for port or default to 3000
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT || '3000', 10);
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
 // Root endpoint (for testing)
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('Reminder MCP Server is running');
 });
- 
+
 // MCP Endpoints
 
 /**
  * Set a reminder
  */
-app.post('/mcp/set', async (req, res) => {
+app.post('/mcp/set', async (req: Request, res: Response) => {
   const { text, time } = req.body;
 
   if (!text || !time) {
@@ -52,7 +54,7 @@ app.post('/mcp/set', async (req, res) => {
 /**
  * Save a reminder (persist it)
  */
-app.post('/mcp/save', async (req, res) => {
+app.post('/mcp/save', async (req: Request, res: Response) => {
   const { id } = req.body;
 
   if (!id) {
@@ -85,7 +87,7 @@ app.post('/mcp/save', async (req, res) => {
 /**
  * List all reminders
  */
-app.get('/mcp/list', async (req, res) => {
+app.get('/mcp/list', async (req: Request, res: Response) => {
   try {
     const result = await db.query('SELECT id, text, time FROM reminders');
     res.json({
@@ -105,7 +107,7 @@ app.get('/mcp/list', async (req, res) => {
 /**
  * Delete a reminder
  */
-app.post('/mcp/delete', async (req, res) => {
+app.post('/mcp/delete', async (req: Request, res: Response) => {
   const { id } = req.body;
 
   if (!id) {
@@ -137,3 +139,4 @@ app.post('/mcp/delete', async (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
+

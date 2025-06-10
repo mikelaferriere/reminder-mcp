@@ -2,7 +2,7 @@
 
 # Reminder MCP
 
-Reminder MCP is a simple reminder service that allows users to create, manage, and receive reminders. This project is built with Node.js and provides a RESTful API for interacting with the reminder system.
+Reminder MCP is a simple reminder service that allows users to create, manage, and receive reminders. This project is built with Node.js and TypeScript, providing a RESTful API for interacting with the reminder system.
 
 ## Table of Contents
 - [Features](#features)
@@ -20,6 +20,7 @@ Reminder MCP is a simple reminder service that allows users to create, manage, a
 - Create and manage reminders with specific dates and times
 - Receive notifications for upcoming reminders
 - Simple RESTful API for integration with other services
+- Built with TypeScript for better type safety and developer experience
 
 ## Installation
 
@@ -49,7 +50,7 @@ The server listens on port 3000 by default, but you can override this by setting
 
 2. Run the database migration to create the reminders table (this will also add a sample reminder):
    ```bash
-   docker exec -it $(docker-compose ps -q reminder-mcp) node migrations/init_db.js
+   docker exec -it $(docker-compose ps -q reminder-mcp) node dist/migrations/init_db.js
    ```
 
 3. The application will automatically connect to the PostgreSQL database using the configuration in `docker-compose.yml`.
@@ -72,12 +73,17 @@ The server listens on port 3000 by default, but you can override this by setting
 
 ## Usage
 
-1. Start the server:
+1. Build the TypeScript files:
    ```bash
-   node server.js
+   npm run build
    ```
 
-2. The API will be available at `http://localhost:3000`.
+2. Start the server:
+   ```bash
+   npm start
+   ```
+
+3. The API will be available at `http://localhost:3000`.
 
 ## API Endpoints
 
@@ -113,7 +119,7 @@ The following endpoints are available:
 To test the API endpoints, you can use the provided test script:
 
 ```bash
-node test_endpoints.js
+npm run build && node dist/test_endpoints.js
 ```
 
 This will run a series of tests against the available endpoints to ensure they're working correctly.
