@@ -6,6 +6,8 @@ Reminder MCP is a simple reminder service that allows users to create, manage, a
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
+  - [Using Docker (Recommended)](#using-docker-recommended)
+  - [Without Docker](#without-docker)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Testing](#testing)
@@ -19,6 +21,25 @@ Reminder MCP is a simple reminder service that allows users to create, manage, a
 - Simple RESTful API for integration with other services
 
 ## Installation
+
+### Using Docker (Recommended)
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mikelaferriere/reminder-mcp.git
+   cd reminder-mcp
+   ```
+
+2. Build and run using Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. The API will be available at `http://localhost:3000`.
+
+The server listens on port 3000 by default, but you can override this by setting the PORT environment variable in the docker-compose.yml file.
+
+### Without Docker
 
 1. Clone the repository:
    ```bash
