@@ -1,4 +1,5 @@
 
+
 # Reminder MCP
 
 Reminder MCP is a simple reminder service that allows users to create, manage, and receive reminders. This project is built with Node.js and provides a RESTful API for interacting with the reminder system.
@@ -39,6 +40,20 @@ Reminder MCP is a simple reminder service that allows users to create, manage, a
 
 The server listens on port 3000 by default, but you can override this by setting the PORT environment variable in the docker-compose.yml file.
 
+### Setting Up PostgreSQL Database
+
+1. Build and run the services with Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+
+2. Run the database migration to create the reminders table (this will also add a sample reminder):
+   ```bash
+   docker exec -it $(docker-compose ps -q reminder-mcp) node migrations/init_db.js
+   ```
+
+3. The application will automatically connect to the PostgreSQL database using the configuration in `docker-compose.yml`.
+
 ### Without Docker
 
 1. Clone the repository:
@@ -68,27 +83,30 @@ The server listens on port 3000 by default, but you can override this by setting
 
 The following endpoints are available:
 
-- `GET /reminders`: Get a list of all reminders
-- `POST /reminders`: Create a new reminder
+- `GET /`: Check if the server is running
+- `POST /mcp/set`: Set a new reminder
   - Request body:
     ```json
     {
-      "title": "string",
-      "description": "string",
-      "dateTime": "ISO string"
+      "text": "string",
+      "time": "ISO string"
     }
     ```
-- `GET /reminders/:id`: Get details of a specific reminder by ID
-- `PUT /reminders/:id`: Update a specific reminder by ID
+- `POST /mcp/save`: Save (persist) a reminder by ID
   - Request body:
     ```json
     {
-      "title": "string",
-      "description": "string",
-      "dateTime": "ISO string"
+      "id": "number"
     }
     ```
-- `DELETE /reminders/:id`: Delete a specific reminder by ID
+- `GET /mcp/list`: List all reminders
+- `POST /mcp/delete`: Delete a reminder by ID
+  - Request body:
+    ```json
+    {
+      "id": "number"
+    }
+    ```
 
 ## Testing
 
@@ -113,3 +131,4 @@ Contributions are welcome! Please open an issue or submit a pull request with yo
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
