@@ -72,9 +72,9 @@ The server listens on port 3000 by default, but you can override this by setting
 
 ## Usage
 
-1. Start the server:
+1. Start the MCP server using the new implementation that follows standard MCP formats and protocols:
    ```bash
-   node server.js
+   node mcp_server.js
    ```
 
 2. The API will be available at `http://localhost:3000`.
