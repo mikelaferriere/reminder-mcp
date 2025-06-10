@@ -128,6 +128,67 @@ Contributions are welcome! Please open an issue or submit a pull request with yo
 4. Push to the branch (`git push origin feature-branch`)
 5. Open a Pull Request
 
+## Integration with OpenWebUI
+
+To integrate Reminder MCP with OpenWebUI, follow these steps:
+
+1. **Set up OpenWebUI**:
+   - Follow the instructions in the OpenWebUI documentation to set up and configure your instance.
+   - Make sure OpenWebUI is running and accessible.
+
+2. **Configure Reminder MCP API Endpoints**:
+   - Ensure that the Reminder MCP service is running and accessible at a specific URL (e.g., `http://localhost:3000`).
+
+3. **Create an Integration Script**:
+   - Create a script in your OpenWebUI project to interact with the Reminder MCP API.
+   - Use HTTP requests to call the Reminder MCP endpoints from within OpenWebUI.
+
+4. **Example Integration Code**:
+   ```javascript
+   const axios = require('axios');
+
+   // Set the base URL for the Reminder MCP service
+   const REMINDER_API_URL = 'http://localhost:3000';
+
+   // Function to create a new reminder
+   async function createReminder(text, time) {
+     try {
+       const response = await axios.post(`${REMINDER_API_URL}/mcp/set`, { text, time });
+       console.log('Reminder created:', response.data);
+       return response.data;
+     } catch (error) {
+       console.error('Error creating reminder:', error);
+       throw error;
+     }
+   }
+
+   // Function to list all reminders
+   async function listReminders() {
+     try {
+       const response = await axios.get(`${REMINDER_API_URL}/mcp/list`);
+       console.log('Reminders:', response.data);
+       return response.data;
+     } catch (error) {
+       console.error('Error listing reminders:', error);
+       throw error;
+     }
+   }
+
+   // Example usage
+   (async () => {
+     await createReminder('Test Reminder', new Date(Date.now() + 60000).toISOString());
+     const reminders = await listReminders();
+     console.log('All reminders:', reminders);
+   })();
+   ```
+
+5. **Add the Integration to OpenWebUI**:
+   - Integrate the above script into your OpenWebUI project, ensuring it's called at appropriate times (e.g., when a user creates or views reminders).
+
+6. **Test the Integration**:
+   - Test the integration by creating and listing reminders through the OpenWebUI interface.
+   - Ensure that data is correctly passed between OpenWebUI and Reminder MCP.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
