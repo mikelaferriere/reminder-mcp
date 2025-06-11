@@ -3,11 +3,12 @@
 {
   "compilerOptions": {
     "target": "ES2019",
-    "module": "commonjs",
+    "module": "ESNext", // Changed from commonjs to ESNext for ES module compatibility
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
